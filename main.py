@@ -34,7 +34,7 @@ def dividaAlterar():
     print("Digite o valor da divida")
     valor = int(input())
     clientes[i].valorDivida(valor)
-# -------------------------Funcoes----------------------------
+# -------------------------Funcoes------------------------------
 #Laço de Repetição e chamada das funcoes----------------------
 while(op!=0):
     menu()
