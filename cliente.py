@@ -10,3 +10,5 @@ class Cliente():
         print(".....................................................................")
     def valorDivida(self,divida):
         self.__divida=divida
+
+#mudança
