@@ -11,7 +11,9 @@ def inserir():
     nome = input()
     print("CPF")
     cpf = input()
-    clienteOb = cliente.Cliente(nome, cpf)
+    print("Endereço")
+    endereco=input()
+    clienteOb = cliente.Cliente(nome, cpf,endereco)
     print("Deseja salvar? s/n:")
     salv=input()
     if(salv=="s"):
