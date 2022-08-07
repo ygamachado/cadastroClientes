@@ -1,26 +1,7 @@
 import cliente
-import mysql.connector
 
-db_connection = mysql.connector.connect(host="localhost", user="root", passwd="", database="cad_bd")
-cursor = db_connection.cursor()
 
-#CRUD
-#Create
-login="bolacha"
-senha="12345"
-nome="Pedro"
-comando = f'INSERT INTO `cad_bd`.`usuario` (`login`, `senha`) VALUES ("{login}","{senha}")'
 
-#read
-
-comando = 'SELECT * FROM cad_bd.usuario'
-
-cursor.execute(comando)
-db_connection.commit()#edita o banco de dados
-#resultado=cursor.fetchall()#ler o banco
-
-cursor.close()
-db_connection.close()
 op = 5
 clientes = []
 
