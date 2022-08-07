@@ -1,6 +1,8 @@
 import cliente
+import bd_connector
 
-
+conectar = bd_connector.DataBase()
+conectar.leitura()
 
 op = 5
 clientes = []
@@ -11,6 +13,7 @@ def menu():
     print("\n========================= Escolha uma opção ===========================")
     print("1-cadastrar cliente \n2-Listar Clientes \n3-Editar Divida\n0-sair")
     print("=======================================================================")
+
 
 
 def inserir():

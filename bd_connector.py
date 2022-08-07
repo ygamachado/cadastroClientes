@@ -2,8 +2,7 @@ import mysql.connector
 
 
 class DataBase():
-    db_connection = mysql.connector.connect(host="localhost", user="root", passwd="", database="cad_bd")
-    cursor = db_connection.cursor()
+
 
 
 # CRUD
@@ -13,15 +12,28 @@ class DataBase():
         senha="12345"
         nome="Pedro"
         comando = f'INSERT INTO `cad_bd`.`usuario` (`login`, `senha`) VALUES ("{login}","{senha}")'
-        cursor.execute()
         self.cursor.execute(comando)
-
+        self.db_connection.commit()
 # read
-    def leitura(self,cursor):
+    def leitura(self):
+        db_connection = mysql.connector.connect(host="localhost", user="root", passwd="", database="cad_bd")
+        cursor = db_connection.cursor()
         comando = 'SELECT * FROM cad_bd.usuario'
-        self.cursor.execute(comando)
-        resultado = self.cursor.fetchall()  # ler o banco
+        cursor.execute(comando)
+        resultado = cursor.fetchall()  # ler o banco
         print(resultado)
+
+        cursor.close()
+        db_connection.close()
+# update
+    def update(self,login,senha):
+        comando = f'UPDATE `cad_bd`.`usuario` SET(`login`, `senha`) = ("{login}","{senha}") WHERE login = {login}'
+        self.cursor.execute(comando)
+        self.db_connection.commit()
+
+# delete
+    def delete(self,login):
+        comando = f'DELETE FROM`cad_bd`.`usuario` WHERE `login` = "{login}"'
 
     # comando = 'SELECT * FROM cad_bd.usuario'
 # cursor.execute(comando)
@@ -30,8 +42,6 @@ class DataBase():
 # print(resultado)
 
 
-    cursor.close()
-    db_connection.close()
 
 # CREATE
 
