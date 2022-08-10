@@ -1,40 +1,49 @@
 import mysql.connector
-
+import cliente
 
 class DataBase():
-
+    db_connection = mysql.connector.connect(host="localhost", user="root", passwd="", database="cad_bd")
 
 
 # CRUD
     # Create
-    def cadastrar(self,cursor):
-        login="admin1"
-        senha="12345"
-        nome="Pedro"
-        comando = f'INSERT INTO `cad_bd`.`usuario` (`login`, `senha`) VALUES ("{login}","{senha}")'
-        self.cursor.execute(comando)
+    def cadastrar(self,nome,cpf,idade,endereco):
+        divida=0
+        id_usuario = 1
+        cursor = self.db_connection.cursor()
+        #comando = f'INSERT INTO `cad_bd`.`cliente` (`nome`, `senha`) VALUES ("{login}","{senha}")'
+        comando = f'INSERT INTO `cad_bd`.`cliente`' \
+                  f' (`nome`, `cpf`, `divida`, `idade`, `endereco`, `id_usuario`) ' \
+                  f'VALUES ("{nome}", "{cpf}","{divida}", "{idade}", "{endereco}", "{id_usuario}")'
+        cursor.execute(comando)
         self.db_connection.commit()
+        cursor.close()
+        #self.db_connection.close()
 # read
     def leitura(self):
-        db_connection = mysql.connector.connect(host="localhost", user="root", passwd="", database="cad_bd")
-        cursor = db_connection.cursor()
-        comando = 'SELECT * FROM cad_bd.usuario'
+        cursor = self.db_connection.cursor()
+        comando = 'SELECT * FROM cad_bd.cliente'
         cursor.execute(comando)
         resultado = cursor.fetchall()  # ler o banco
-        print(resultado)
-
+        return(resultado)
         cursor.close()
-        db_connection.close()
+        self.db_connection.close()
 # update
-    def update(self,login,senha):
-        comando = f'UPDATE `cad_bd`.`usuario` SET(`login`, `senha`) = ("{login}","{senha}") WHERE login = {login}'
-        self.cursor.execute(comando)
+    def update(self,id,divida):
+        cursor = self.db_connection.cursor()
+        comando = f'UPDATE `cad_bd`.`cliente` SET(`divida`) = ("{divida}") WHERE id_cliente = {id}'
+        cursor.execute(comando)
         self.db_connection.commit()
-
+        cursor.close()
+        self.db_connection.close()
 # delete
-    def delete(self,login):
-        comando = f'DELETE FROM`cad_bd`.`usuario` WHERE `login` = "{login}"'
-
+    def delete(self,id,login):
+        cursor = self.db_connection.cursor()
+        comando = f'DELETE FROM`cad_bd`.`cliente` WHERE `login` = "{id}"'
+        cursor.execute(comando)
+        self.db_connection.commit()
+        cursor.close()
+        self.db_connection.close()
     # comando = 'SELECT * FROM cad_bd.usuario'
 # cursor.execute(comando)
 # resultado=cursor.fetchall()#ler o banco

@@ -2,7 +2,6 @@ import cliente
 import bd_connector
 
 conectar = bd_connector.DataBase()
-conectar.leitura()
 
 op = 5
 clientes = []
@@ -21,15 +20,16 @@ def inserir():
     nome = input()
     print("CPF")
     cpf = input()
-    print("Endereço")
-    endereco = input()
-    clienteOb = cliente.Cliente(nome, cpf, endereco)
+    print("idade")
+    idade = int(input())
+    print("Endereco")
+    endereco=input()
+    clienteOb = cliente.Cliente(nome, cpf, idade,endereco)
     print("Deseja salvar? s/n:")
     salv = input()
     if (salv == "s"):
         salvar(clienteOb)
-
-
+        conectar.cadastrar(nome,cpf,idade,endereco)
 def salvar(clienteOb):
     clientes.append(clienteOb)
     print("==========================  Salvando....=====================================")
@@ -39,8 +39,10 @@ def salvar(clienteOb):
 
 def listar():
     print(".........................Lista de Clientes...............................\n")
+    print(conectar.leitura())
     for i in range(0, len(clientes)):
         clientes[i].imprimir()
+
 
 
 def dividaAlterar():
