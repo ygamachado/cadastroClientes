@@ -21,30 +21,36 @@ class DataBase():
         #self.db_connection.close()
 # read
     def leitura(self):
+        clientes=[]
         cursor = self.db_connection.cursor()
         comando = 'SELECT * FROM cad_bd.cliente'
         cursor.execute(comando)
         resultado = cursor.fetchall()  # ler o banco
         return(resultado)
         cursor.close()
-        self.db_connection.close()
+
+
+
+        #self.db_connection.close()
 # update
     def update(self,id,divida):
         cursor = self.db_connection.cursor()
-        comando = f'UPDATE `cad_bd`.`cliente` SET(`divida`) = ("{divida}") WHERE id_cliente = {id}'
+        comando = f'UPDATE cad_bd.cliente SET divida = "{divida}" WHERE (id_cliente = "{id}");'
         cursor.execute(comando)
         self.db_connection.commit()
         cursor.close()
-        self.db_connection.close()
+        #self.db_connection.close()
 # delete
-    def delete(self,id,login):
+    def delete(self,id):
         cursor = self.db_connection.cursor()
-        comando = f'DELETE FROM`cad_bd`.`cliente` WHERE `login` = "{id}"'
+        comando = f'DELETE FROM `cad_bd`.`cliente` WHERE (`id_cliente` = "{id}");'
         cursor.execute(comando)
         self.db_connection.commit()
         cursor.close()
-        self.db_connection.close()
+        #self.db_connection.close()
     # comando = 'SELECT * FROM cad_bd.usuario'
+    def encerrar(self):
+        self.db_connection.close()
 # cursor.execute(comando)
 # resultado=cursor.fetchall()#ler o banco
 # db_connection.commit()#edita o banco de dados

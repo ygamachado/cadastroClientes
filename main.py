@@ -13,8 +13,6 @@ def menu():
     print("1-cadastrar cliente \n2-Listar Clientes \n3-Editar Divida\n0-sair")
     print("=======================================================================")
 
-
-
 def inserir():
     print("Nome:")
     nome = input()
@@ -32,6 +30,7 @@ def inserir():
         conectar.cadastrar(nome,cpf,idade,endereco)
 def salvar(clienteOb):
     clientes.append(clienteOb)
+    clientes.append(conectar.leitura())
     print("==========================  Salvando....=====================================")
     print("-----------------------------------------------------------------------------")
     print("==========================  Salvo!  =========================================\n")
@@ -39,22 +38,20 @@ def salvar(clienteOb):
 
 def listar():
     print(".........................Lista de Clientes...............................\n")
+    #clientes.append(conectar.leitura())
     print(conectar.leitura())
-    for i in range(0, len(clientes)):
-        clientes[i].imprimir()
+    #for i in range(0, len(clientes)):
+        #clientes[i]
+        #print(clientes)
 
 
 
 def dividaAlterar():
-    for i in range(len(clientes)):
-        print("Cliente", i)
-        clientes[i].imprimir()
     print("digite qual o cliente por numero")
     i = int(input())
     print("Digite o valor da divida")
     valor = int(input())
-    clientes[i].valorDivida(valor)
-
+    conectar.update(i,valor)
 
 # -------------------------Funcoes------------------------------
 # Laço de Repetição e chamada das funcoes----------------------
